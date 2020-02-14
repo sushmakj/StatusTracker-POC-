@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.zensar.entities.UserGroup;
 
+/**
+ * @author Sushma Kumari
+ * */
+
 @Repository
 public interface UserGroupDao extends JpaRepository<UserGroup, Long> {
 	public Optional<UserGroup> findByStatusId(Long statusId);	

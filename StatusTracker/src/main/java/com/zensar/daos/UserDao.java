@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.zensar.entities.User;
 
+/**
+ * @author Sushma Kumari
+ * */
+
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
 	public Optional<User> findByProjectId(String projectId);	

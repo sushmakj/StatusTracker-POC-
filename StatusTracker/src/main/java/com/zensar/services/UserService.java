@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.zensar.entities.User;
 
+/**
+ * @author Sushma Kumari
+ * */
+
 public interface UserService {
 	public void addUser(User user);
 	public void updateUser(User user);

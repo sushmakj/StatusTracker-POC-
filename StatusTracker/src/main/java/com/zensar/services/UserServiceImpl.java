@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zensar.daos.UserDao;
 import com.zensar.entities.User;
 
+/**
+ * @author Sushma Kumari
+ * */
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {

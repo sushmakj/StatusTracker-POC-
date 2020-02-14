@@ -11,7 +11,6 @@ import javax.persistence.OneToOne;
 
 /**
  * @author Sushma Kumari
- * @creation_date 11th Feb 2020 11:30
  * */
 
 @Entity
