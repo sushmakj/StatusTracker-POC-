@@ -1,7 +1,11 @@
+/**
+ * @author Sushma Kumari
+ * @creation_date 11th Feb 2020 11:30
+ */
+
 package com.zensar.entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-/**
- * @author Sushma Kumari
- * @creation_date 11th Feb 2020 11:30
- */
-
 @Entity
 public class User {
 
@@ -23,41 +22,44 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 
-	@Column(nullable = false, updatable = true)
+	@Column(nullable = false, updatable = true, unique = true)
 	private String userName;
 
-	@Column(nullable = false, updatable = true, unique = true)
+	@Column(nullable = false, updatable = true)
 	private String password;
 		
 	@OneToOne(mappedBy = "user")
 	@JoinColumn(name = "statusId")
-	private Status statusId;
+	private Status status;
 
 	@OneToOne(mappedBy = "user")
 	@JoinColumn(name = "groupId")
-	private List<UserGroup> groupId;
+	private UserGroup userGroup;
 
 	@Column(nullable = false, updatable = true)
 	private LocalDate creationDate;
 
-	@OneToOne(mappedBy = "user")
-	@JoinColumn(name = "projectId")
-	private Project projectId;
+//	@ManyToOne
+//	@JoinColumn(name = "projectId")				// order MySQL to add a FK for ProjectID
+	private String projectId;					// order Spring Boot to send a Project object inside User object
+	
+	private Project project;
+	
+	public User() {
+		// keep this blank for Spring Security
+	}
 
-	@OneToOne
-	private UserAuth userAuth;
-
-	public User(Long userId, String userName, String password, Status statusId, List<UserGroup> groupId,
-			LocalDate creationDate, Project projectId, UserAuth userAuth) {
+	public User(Long userId, String userName, String password, Status status, UserGroup userGroup,
+			LocalDate creationDate, String projectId, Project project) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
-		this.statusId = statusId;
-		this.groupId = groupId;
+		this.status = status;
+		this.userGroup = userGroup;
 		this.creationDate = creationDate;
 		this.projectId = projectId;
-		this.userAuth = userAuth;
+		this.project = project;
 	}
 
 	public Long getUserId() {
@@ -84,20 +86,20 @@ public class User {
 		this.password = password;
 	}
 
-	public Status getStatusId() {
-		return statusId;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setStatusId(Status statusId) {
-		this.statusId = statusId;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
-	public List<UserGroup> getGroupId() {
-		return groupId;
+	public UserGroup getUserGroup() {
+		return userGroup;
 	}
 
-	public void setGroupId(List<UserGroup> groupId) {
-		this.groupId = groupId;
+	public void setUserGroup(UserGroup userGroup) {
+		this.userGroup = userGroup;
 	}
 
 	public LocalDate getCreationDate() {
@@ -108,20 +110,20 @@ public class User {
 		this.creationDate = creationDate;
 	}
 
-	public Project getProjectId() {
+	public String getProjectId() {
 		return projectId;
 	}
-
-	public void setProjectId(Project projectId) {
+ 
+	public void setProjectId(String projectId) {
 		this.projectId = projectId;
 	}
 
-	public UserAuth getUserAuth() {
-		return userAuth;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setUserAuth(UserAuth userAuth) {
-		this.userAuth = userAuth;
+	public void setProject(Project project) {
+		this.project = project;
 	}
-	
+
 }

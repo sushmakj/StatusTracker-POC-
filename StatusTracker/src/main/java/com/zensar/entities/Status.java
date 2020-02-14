@@ -22,15 +22,15 @@ public class Status {
 	@Column(nullable = false, updatable = true, unique = true)
 	private String statusName;
 	
+	@Column(nullable = false, updatable = true)
+	private String module;
+	
 	@OneToOne
 	private UserGroup userGroup;
 	
 	@OneToOne
 	private User user;
-	
-	@Column(nullable = false, updatable = true)
-	private String module;
-
+		
 	public String getModule() {
 		return module;
 	}
