@@ -29,7 +29,7 @@ public class UserGroup {
 	@OneToOne
 	private User user;
 	
-	@OneToOne(mappedBy = "UserGroup")
+	@OneToOne(mappedBy = "userGroup")
 	@JoinColumn(name = "statusId")
 	private Status statusId;
 		

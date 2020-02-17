@@ -1,15 +1,20 @@
 package com.zensar.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Sushma Kumari
@@ -26,65 +31,25 @@ public class Project {
 	@Column(nullable = false, updatable = true)
 	private String Name;
 	
-	@OneToOne
-	private User createdBy; //UserId
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<User> users = new ArrayList<User>();
+	
+	// TODO: Create @OneToOne with User, Ms. Genius.
+	@OneToOne(mappedBy = "project")
+	@JoinColumn(name = "createdBy")
+	private User user;
 	
 	@Column(nullable = false, updatable = true)
-	private String Description;
+	private String description;
 	
 	@Column(nullable = false, updatable = true)
 	private String version;
 	
-	@OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
-	private List<Jira> jira;
+	@JsonIgnore
+	@OneToMany(mappedBy = "project",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Jira> jiras = new ArrayList<Jira>();
 
-	public Long getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
-	}
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
-	public User getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getDescription() {
-		return Description;
-	}
-
-	public void setDescription(String description) {
-		Description = description;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public List<Jira> getJira() {
-		return jira;
-	}
-
-	public void setJira(List<Jira> jira) {
-		this.jira = jira;
-	}
-
+	
 	
 }
