@@ -1,0 +1,18 @@
+package com.zensar.services;
+
+import java.util.List;
+
+import com.zensar.entities.User;
+
+/**
+ * @author Sushma Kumari
+ * */
+
+public interface UserService {
+	public void addUser(User user);
+	public void updateUser(User user);
+	public void deleteUser(User user);
+	public List<User> findAllUsers();
+	public User getByprojectId(String projectId);
+
+}
